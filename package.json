@@ -1,0 +1,26 @@
+{
+  "name": "saturn",
+  "version": "1.0.1",
+  "description": "saturn-bot",
+  "main": "main.js",
+  "dependencies": {
+    "ascii-table": "0.0.9",
+    "beautify": "0.0.8",
+    "command": "0.0.5",
+    "commands": "0.0.7",
+    "cute": "0.0.5",
+    "discord-reply": "^0.1.2",
+    "discord.js": "^12.5.1",
+    "discord.js-selfbot": "^12.0.2",
+    "dotenv": "^8.6.0",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.10",
+    "ws": "^7.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
