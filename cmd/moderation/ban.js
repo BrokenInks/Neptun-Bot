@@ -24,7 +24,7 @@ module.exports = {
         //now the code!!
          target.roles.add("872129570550194236") // adding the role to the user
         message.channel.send(`Пользователь ${target.user.username} успешно отправлен в Сибирь! по причине ${reason}`)
-        client.channels.get("872129848632574043").send(`${target.user.username} вы заблокированы по причине: ${reason} на ${time}`)
+        client.channels.cache.find(channel => channel.name == "403").send(`${target.user.username} вы заблокированы по причине: ${reason} на ${time}`)
 
         // Unban A User After Time Is Finished
         setTimeout(async () => {
