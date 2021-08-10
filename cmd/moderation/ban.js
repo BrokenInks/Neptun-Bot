@@ -17,11 +17,8 @@ module.exports = {
         //next we define some variables
         const target = message.mentions.members.first() //member = mentions
         if(!target) return message.channel.send('Укажите пользователя') //when no member is pinged
-        const reason = args [1]
-        if(!reason) return message.reply('Укажите причину') // If Time Is Not Provided
-        const time = args [2]
-        if(!time) return message.reply('Укажите время') // If Time Is Not Provided
-        //now the code!!
+ time = args[2]
+reason = args.slice(2).join(" ") // сбился немного, мб slice(3) 
          target.roles.add("872129570550194236") // adding the role to the user
         message.channel.send(`Пользователь ${target.user.username} успешно отправлен в Сибирь! по причине ${reason}`)
         client.channels.cache.find(channel => channel.name == "403").send(`${target.user.username} вы заблокированы по причине: ${reason} на ${time}`)
