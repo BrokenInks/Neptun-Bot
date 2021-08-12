@@ -12,11 +12,6 @@ const mongoose = require('mongoose');
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 
-const Levels = require('discord-xp')
-
-Levels.setURL("mongodb+srv://BrokenInks:Froog2020d@@cluster0.gvq71.mongodb.net/Discords?retryWrites=true&w=majority")
-console.log("mongo loaded..")
-
 client.categories = fs.readdirSync("./cmd/");
 
 ["command"].forEach(handler => {
@@ -24,8 +19,6 @@ client.categories = fs.readdirSync("./cmd/");
 });
 
 const cooldowns = new Discord.Collection();
-
-
 
 client.once('ready', () => {
 	console.log(`${client.user.tag} запустился!`);
@@ -41,28 +34,38 @@ client.once('ready', () => {
 		client.user.setActivity(`${aye_status}`,{ type: 'WATCHING'}, { status: 'idle'})
 		},60000);
 	  });
-		client.on('message', message => {
-		if (!message.content.startsWith(prefix) || message.author.bot) return; 
 
-		const args = message.content.slice(prefix.length).trim().split(/ +/);
-		const commandName = args.shift().toLowerCase();
+client.on('message', message => {
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const commandName = args.shift().toLowerCase();
+    
+	const command = client.commands.get(commandName)
+		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+	if (!command) return;
+
+	if (command.args && !args.length) {
+			let reply = `Ты не правильно написал команду, ${message.author}!`;
 		
-		const command = client.commands.get(commandName)
-			|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-	
-		if (!command) return;
-	
-		if (command.args && !args.length) {
-				let reply = `Ты не правильно написал команду, ${message.author}!`;
-			
-					if (command.usage) {
-						reply += `\nПравильное написание команды ${command.name}: \`${prefix}${command.name} ${command.usage}\``;
-					}
-			
-					return message.channel.send(reply);
+				if (command.usage) {
+					reply += `\nПравильное написание команды ${command.name}: \`${prefix}${command.name} ${command.usage}\``;
 				}
-	
-	
+		
+				return message.channel.send(reply);
+			}
+
+
+			if (!cooldowns.has(command.name)) {
+				cooldowns.set(command.name, new Discord.Collection());
+			}
+			
+			const now = Date.now();
+			const timestamps = cooldowns.get(command.name);
+			const cooldownAmount = (command.cooldown || 3) * 1000;
+			
+			if (timestamps.has(message.author.id)) {
 				if (!cooldowns.has(command.name)) {
 					cooldowns.set(command.name, new Discord.Collection());
 				}
@@ -72,34 +75,24 @@ client.once('ready', () => {
 				const cooldownAmount = (command.cooldown || 3) * 1000;
 				
 				if (timestamps.has(message.author.id)) {
-					if (!cooldowns.has(command.name)) {
-						cooldowns.set(command.name, new Discord.Collection());
-					}
-					
-					const now = Date.now();
-					const timestamps = cooldowns.get(command.name);
-					const cooldownAmount = (command.cooldown || 3) * 1000;
-					
 					if (timestamps.has(message.author.id)) {
-						if (timestamps.has(message.author.id)) {
-							const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-						
-							if (now < expirationTime) {
-								const timeLeft = (expirationTime - now) / 1000;
-								return message.reply(`пожалуйста подождите ${timeLeft.toFixed(1)} секунд что бы использовать команду \`${command.name}\` `);
-							}
-	
-							timestamps.set(message.author.id, now);
-	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-	
+						const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+					
+						if (now < expirationTime) {
+							const timeLeft = (expirationTime - now) / 1000;
+							return message.reply(`пожалуйста подождите ${timeLeft.toFixed(1)} секунд что бы использовать команду \`${command.name}\` `);
 						}
+
+						timestamps.set(message.author.id, now);
+setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
 					}
 				}
-	
-				try {
-					command.execute(message, args, client);    } catch (error) {        console.error(error);
-				  }
-				  });
-	
-	
+			}
+
+			try {
+				command.execute(message, args, client);    } catch (error) {        console.error(error);
+			  }
+			  });
+
 client.login(token);

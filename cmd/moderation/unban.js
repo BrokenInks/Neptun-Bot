@@ -13,7 +13,7 @@ module.exports = {
         if(!target) return message.channel.send('Укажите пользователя') //when no member is pinged
         const reason = args [1]
             target.roles.remove('872129570550194236')
-            message.channel.send(`User ${target.user.username} unbanned of this server`)
+            message.channel.send(`Пользователь ${target.user.username} успешно возвращен из Сибири!`)
          ms(time)
     
     }}
