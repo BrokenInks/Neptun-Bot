@@ -16,17 +16,17 @@ module.exports = {
         if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send('You do not have permission.')
         //next we define some variables
         const target = message.mentions.members.first() //member = mentions
-        if(!target) return message.channel.send('Укажите пользователя') //when no member is pinged
+        if(!target) return message.channel.send('^ban <@member> <reason %> <time>') //when no member is pinged
  time = args[2]
-reason = args.slice(3).join(" ") // сбился немного, мб slice(3) 
+reason = args.slice(2).join(" ") // сбился немного, мб slice(3) 
          target.roles.add("872129570550194236") // adding the role to the user
         message.channel.send(`Пользователь ${target.user.username} успешно отправлен в Сибирь! по причине ${reason}`)
-        client.channels.cache.find(channel => channel.name == "403").send(`${target.user.username} вы заблокированы по причине: ${reason} на ${time}`)
+        client.channels.cache.find(channel => channel.name == "403").send(`${target.user.username} you banned from reason: ${reason} on the ${time}`)
 
         // Unban A User After Time Is Finished
         setTimeout(async () => {
             target.roles.remove('872129570550194236')
-            message.channel.send(`Пользователь ${target.user.username} успешно возвращен из Сибири!`)
+            message.channel.send(`User ${target.user.username} banned from this server.`)
         }, ms(time))
 
     }
