@@ -18,7 +18,7 @@ module.exports = {
         const target = message.mentions.members.first() //member = mentions
         if(!target) return message.channel.send('^ban <@member> <reason %> <time>') //when no member is pinged
  time = args[3]
-reason = args.slice(2).join(" ") // сбился немного, мб slice(3) 
+reason = args.slice(1).join(" ") // сбился немного, мб slice(3) 
          target.roles.add("872129570550194236") // adding the role to the user
         message.channel.send(`User ${target.user.username} banned from this server ${reason}`)
         client.channels.cache.find(channel => channel.name == "403").send(`${target.user.username} you banned from reason: ${reason} on the ${time}`)
