@@ -5,11 +5,11 @@ module.exports = {
     execute(message, args, client) {
         const baskEmbed = new Discord.MessageEmbed()
             .setColor('#DAF7A6')
-            .setTitle(`Информация о боте HDDT`)
-            .setDescription(`Основная:\n• Серверов: ${client.guilds.cache.size}\n• Участников: ${client.users.cache.size}\n`)
+            .setTitle(`About the bot`)
+            .setDescription(`Main:\n• Servers: ${client.guilds.cache.size}\n• Members: ${client.users.cache.size}\n`)
             .setURL('')
             .setAuthor(message.author.username, message.author.avatarURL(), 'https://discord.js.org/%27')
             .setTimestamp()
-            .setFooter('для '+message.author.username, message.author.avatarURL)
+            .setFooter('for '+message.author.username, message.author.avatarURL)
         message.channel.send(baskEmbed);
     }}
