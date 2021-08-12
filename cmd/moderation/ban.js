@@ -20,7 +20,7 @@ module.exports = {
  time = args[2]
 reason = args.slice(2).join(" ") // сбился немного, мб slice(3) 
          target.roles.add("872129570550194236") // adding the role to the user
-        message.channel.send(`Пользователь ${target.user.username} успешно отправлен в Сибирь! по причине ${reason}`)
+        message.channel.send(`User ${target.user.username} banned from this server ${reason}`)
         client.channels.cache.find(channel => channel.name == "403").send(`${target.user.username} you banned from reason: ${reason} on the ${time}`)
 
         // Unban A User After Time Is Finished
