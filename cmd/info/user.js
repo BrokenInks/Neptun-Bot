@@ -17,7 +17,7 @@ module.exports = {
             else {};
             const answer = new Discord.MessageEmbed()
                 .setColor('#0099ff')
-                .setTitle('Инфомация об участнике:')
+                .setTitle('Participant information \:')
                 .setURL('')
                 .setAuthor(scanned_user.username, scanned_user.avatarURL())
                 .setDescription(presence)
@@ -25,10 +25,10 @@ module.exports = {
                 .addFields(
                     { name: 'ID\t: ', value: scanned_user.id , inline: true },
                     { name: 'Full name\t: ', value: scanned_user.username+'#'+scanned_user.discriminator },
-                    { name: 'присоединился\t: ', value: message.guild.member(scanned_user.id).joinedAt },
+                    { name: 'Joined\t: ', value: message.guild.member(scanned_user.id).joinedAt },
                 )
                 .setTimestamp()
-                .setFooter('для '+message.author.username, message.author.avatarURL)
+                .setFooter('For '+message.author.username, message.author.avatarURL)
 
             message.lineReply(answer);
     },
