@@ -6,7 +6,7 @@ let table = new ascii("cmd");
 table.setHeading("Command", "Load status");
 
 module.exports = (client) => {
-    readdirSync("./cmd/").forEach(dir => {
+    readdirSync(`./cmd/`).forEach(dir => {
         const cmd = readdirSync(`./cmd/${dir}/`).filter(file => file.endsWith(".js"));
 
         for (let file of cmd) {
@@ -25,4 +25,6 @@ module.exports = (client) => {
     });
 
     console.log(table.toString());
+
+
 }

@@ -1,5 +1,6 @@
 {
     "prefix": "^",
     "token": "ODcyODE2MTA1NjEyMjQ3MDgx.YQvXVw.aF1OQzjGIF5SzGoawAbn6nkI3-U",
+    "mongoURI": "mongodb+srv://luhhtuuk:fwwKwOfNC1OAHCkO@cluster0.eavxh.mongodb.net/botjsmongas?retryWrites=true&w=majority",
     "ownerID": "852626327310696538"
 }
