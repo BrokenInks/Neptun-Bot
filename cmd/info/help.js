@@ -17,7 +17,7 @@ module.exports = {
       .addFields(
         { name: 'Informations', value: '`bot` `help` `invite` `ping` `user`', inline: false },
         { name: 'Moderation', value: '`ban` `clear` `kick` `say` `unban`',  inline: false },
-        { name: 'Other', value: '`about` | `report`', inline: false },)
+        { name: 'Other', value: '`about`', inline: false },)
       
       message.channel.send(help)
     }
