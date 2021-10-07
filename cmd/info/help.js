@@ -15,9 +15,9 @@ module.exports = {
       .setAuthor('Commands List', message.author.displayAvatarURL())
 
       .addFields(
-        { name: 'Informations', value: '`bot` `help` `invite` `ping` `user`', inline: false },
+        { name: 'Informations', value: '`stats` `help` `invite` `ping` `user`, `server`', inline: false },
         { name: 'Moderation', value: '`ban` `clear` `kick` `say` `unban`',  inline: false },
-        { name: 'Other', value: '`about`', inline: false },)
+        { name: 'Other', value: '`about` | `report`', inline: false },)
       
       message.channel.send(help)
     }

@@ -1,12 +1,12 @@
 const { Client } = require("discord.js");
 const Discord = require('discord.js');
 module.exports = {
-    name: 'invite',
+    name: 'support',
     execute(message, args, client) {
         const baskEmbed = new Discord.MessageEmbed()
             .setColor('#DAF7A6')
             .setTitle('')
-            .setDescription('Чтобы добавить меня на свой сервер, [Нажми сюда!](https://discord.com/api/oauth2/authorize?client_id=872816105612247081&permissions=8&scope=bot)')
+            .setDescription('Зайти на сервер поддержи, [Нажми сюда!](https://discord.gg/dx6nveXJ)')
             .setURL('')
             .setAuthor('')
             .setImage('')
